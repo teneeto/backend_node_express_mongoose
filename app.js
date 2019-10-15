@@ -25,8 +25,23 @@ app.use('/css', express.static(path.join(__dirname, '/node_modules/bootstrap/dis
 app.use('/js', express.static(path.join(__dirname, './node_modules/bootstrap/dist/js')));
 app.use('/js', express.static(path.join(__dirname, './node_modules/jquery/dist')));
 
-// sending response when requested from a browser
+// to set our views directory and view engine
+app.set('views', './src/views');
+app.set('view engine', 'ejs');
+
+// render our view in this case pug
 app.get('/', (req, res) => {
+  res.render('index', {
+    nav: [
+      { link: '/books', title: 'Books' },
+      { link: '/authors', title: 'Authors' },
+    ],
+    title: 'Library',
+  });
+});
+
+// sending response when requested from a browser
+app.get('/test', (req, res) => {
   res.send('Hello from My Library app');
 });
 
