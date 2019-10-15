@@ -1,0 +1,6 @@
+____DEBUG___
+Run everything using "DEBUG=* node app.js"
+Run specific using "DEBUG=app node app.js"
+
+___MORGAN___
+*log somethings to the console that has to do with web traffic
