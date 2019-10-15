@@ -16,6 +16,14 @@ const app = express();
 
 const port = process.env.PORT || 3000;
 
+const nav = [
+  { link: '/books', title: 'Books' },
+  { link: '/authors', title: 'Authors' },
+];
+
+// helps us chain all of our routes
+const bookRouter = require('./routes/bookRoutes')(nav);
+
 // use "combined" for much info and "tiny" for less info
 app.use(morgan('tiny'));
 
@@ -28,6 +36,8 @@ app.use('/js', express.static(path.join(__dirname, './node_modules/jquery/dist')
 // to set our views directory and view engine
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
+
+app.use('/books', bookRouter);
 
 // render our view in this case pug
 app.get('/', (req, res) => {
