@@ -1,20 +1,39 @@
 {
-  "name": "ReSTweb",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "bootstrap": "^4.3.1",
-    "chalk": "^2.4.2",
-    "debug": "^4.1.1",
-    "express": "^4.17.1",
-    "jquery": "^3.4.1",
-    "morgan": "^1.9.1"
-  }
+	"name": "ReSTweb",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "DEBUG=app nodemon app.js",
+		"lint": "eslint app.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"bootstrap": "^4.3.1",
+		"chalk": "^2.4.2",
+		"debug": "^4.1.1",
+		"express": "^4.17.1",
+		"jquery": "^3.4.1",
+		"morgan": "^1.9.1",
+		"nodemon": "^1.19.3"
+	},
+	"devDependencies": {
+		"eslint": "^6.5.1",
+		"eslint-config-airbnb-base": "^14.0.0",
+		"eslint-plugin-import": "^2.18.2"
+	},
+	"nodemonConfig": {
+		"restartable": "rs",
+		"ignore": [
+			"node_modules/**/node_modules"
+		],
+		"delay": "2500",
+		"env": {
+			"NODE_ENV": "development",
+			"PORT": 4000
+		}
+	}
 }
