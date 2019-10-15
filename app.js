@@ -17,6 +17,12 @@ const app = express();
 // use "combined" for much info and "tiny" for less info
 app.use(morgan('tiny'));
 
+// telling express to serve static files
+app.use(express.static(path.join(__dirname, '/public')));
+app.use('/css', express.static(path.join(__dirname, '/node_modules/bootstrap/dist/css')));
+app.use('/js', express.static(path.join(__dirname, './node_modules/bootstrap/dist/js')))
+app.use('/js', express.static(path.join(__dirname, './node_modules/jquery/dist')))
+
 // sending response when requested from a browser
 app.get('/', (req, res) => {
   res.send('Hello from My Library app');
