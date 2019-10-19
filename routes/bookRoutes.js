@@ -26,15 +26,20 @@ function router(nav) {
     });
 
   bookRouter.route('/:id')
-    .get((req, res) => {
+    // middleware
+    .all((req, res, next) => {
       const { id } = req.params;
       connection.query(`select * from books WHERE id = ${id}`, (err, result) => {
         if (err) throw err;
-        res.render('book', {
-          nav,
-          title: 'Library',
-          book: result[0],
-        });
+        [req.book] = result;
+        next();
+      });
+    })
+    .get((req, res) => {
+      res.render('book', {
+        nav,
+        title: 'Library',
+        book: req.book,
       });
     });
 
