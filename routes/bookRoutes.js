@@ -12,33 +12,6 @@ const connection = mysql.createConnection({
 });
 
 function router(nav) {
-  const books = [
-    {
-      title: 'War and Peace',
-      genre: 'historical Fiction',
-      author: 'Lev Nikolayev',
-      read: false,
-    },
-    {
-      title: 'Les Misérables',
-      genre: 'historical Fiction',
-      author: 'Victor Hugo',
-      read: false,
-    },
-    {
-      title: 'Things Fall Apart',
-      genre: 'Fiction',
-      author: 'Chinwa Achebe',
-      read: false,
-    },
-    {
-      title: 'Homlet',
-      genre: 'Novel',
-      author: 'Williams Shakespere',
-      read: false,
-    },
-  ];
-
   bookRouter.route('/')
     .get((req, res) => {
       connection.query('select * from books', (err, result) => {
@@ -55,10 +28,13 @@ function router(nav) {
   bookRouter.route('/:id')
     .get((req, res) => {
       const { id } = req.params;
-      res.render('book', {
-        nav,
-        title: 'Library',
-        book: books[id],
+      connection.query(`select * from books WHERE id = ${id}`, (err, result) => {
+        if (err) throw err;
+        res.render('book', {
+          nav,
+          title: 'Library',
+          book: result[0],
+        });
       });
     });
 

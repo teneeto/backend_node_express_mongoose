@@ -43,6 +43,11 @@ const bookRouter = require('./routes/bookRoutes')(nav);
 // use "combined" for much info and "tiny" for less info
 app.use(morgan('tiny'));
 
+app.use((req, res, next) => {
+  debug(chalk.red('this dude is chitty'));
+  next();
+});
+
 // telling express to serve static files
 app.use(express.static(path.join(__dirname, '/public')));
 app.use('/css', express.static(path.join(__dirname, '/node_modules/bootstrap/dist/css')));
